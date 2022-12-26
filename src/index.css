@@ -1,13 +1,41 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  border-color: rgb(0, 0, 0);
+}
+body {
+  font-family: "Open Sans", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* code {
+  font-family: "Open Sans", "Courier New", monospace;
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* .filter{
+  filter: opacity(70);
+} */
+.auction-bg-1 {
+  background-image: url("./asset/auction-1.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: auto;
+}
+.h-swiper {
+  height: initial;
+}
+.bg-upcoming {
+  background-image: linear-gradient(to right, #4693ed, #c056097d);
+}
+.bg-upcoming-inner {
+  background-image: url(./asset//upcoming.png);
+  background-size: cover;
+}
+.bg-bid {
+  background-image: url(./asset/bid-img.png);
+  background-size: auto;
+  background-repeat: no-repeat;
 }
