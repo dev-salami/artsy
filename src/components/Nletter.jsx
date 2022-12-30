@@ -7,7 +7,7 @@ function Nletter() {
         <div className="md:space-x-6 md:space-y-0 space-y-6 flex md:flex-row flex-col justify-center">
           <input
             placeholder="ENTER YOUR EMAIL"
-            className="border border-black px-4 py-1 w-full md:w-1/2  "
+            className="rounded-md border border-black px-4 py-1 w-full md:w-1/2  "
             type="text"
           />
           <button className="px-6 py-1 text-white bg-black">SUBSCRIBE</button>

@@ -7,6 +7,7 @@
 body {
   font-family: "Open Sans", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  background-color: rgb(229 231 235);
 }
 
 /* code {
@@ -38,4 +39,9 @@ body {
   background-image: url(./asset/bid-img.png);
   background-size: auto;
   background-repeat: no-repeat;
+}
+@layer components {
+  .input {
+    @apply mt-1 p-1 max-w-sm capitalize border  border-gray-300 focus:outline-none focus:ring-0 focus:border-gray-300 rounded text-sm pl-2 text-gray-900;
+  }
 }

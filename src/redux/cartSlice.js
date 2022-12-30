@@ -7,6 +7,14 @@ const getLocalStorage = () => {
     return [];
   }
 };
+const details = () => {
+  let temp = localStorage.getItem("details");
+  if (temp) {
+    return JSON.parse(localStorage.getItem("details"));
+  } else {
+    return {};
+  }
+};
 const getCart = () => {
   let cart = localStorage.getItem("cart");
   if (cart) {
@@ -19,6 +27,7 @@ const initialState = {
   products: getLocalStorage(),
   cartItems: getCart(),
   amount: 0,
+  shipDet: details(),
   total: 0,
   isLoading: false,
 };
@@ -31,7 +40,7 @@ const cartSlice = createSlice({
       const products = action.payload;
       // state.products = products;
       localStorage.setItem("products", JSON.stringify(products));
-      state.cartItems = products;
+      // state.cartItems = products;
     },
     addCart: (state, action) => {
       const { like, count, id, amount } = action.payload;
@@ -48,19 +57,18 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       const tempCart = state.cartItems.filter((item) => item.id !== itemId);
       state.cartItems = [...tempCart];
+      localStorage.setItem("cart", JSON.stringify(tempCart));
       console.log(state.cartItems);
     },
-    decCount: (state, action) => {
-      const id = action.payload;
-      const prod = state.cartItems.find((a) => a.id === id);
-      console.log(state.cartItems);
-      console.log(prod);
+    Check: (state, action) => {
+      const value = action.payload;
+      state.amount = value;
       // prod.amount = prod.amount + 1;
     },
-    inCount: (state, action) => {
-      const { id } = action.payload;
-      const prod = state.cartItems.find((a) => a.id === id);
-      prod.amount = prod.amount + 1;
+    saveDetail: (state, action) => {
+      state.shipDet = action.payload;
+      console.log(state.shipDet);
+      localStorage.setItem("details", JSON.stringify(action.payload));
     },
 
     clearCart: (state, action) => {
@@ -69,7 +77,7 @@ const cartSlice = createSlice({
     },
   },
 });
-export const { fetchData, addCart, removeItem, clearCart, decCount } =
+export const { fetchData, addCart, removeItem, clearCart, saveDetail, Check } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

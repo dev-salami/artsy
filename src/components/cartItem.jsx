@@ -1,9 +1,22 @@
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
+import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, calcTotal, decCount } from "../redux/cartSlice";
 
-function CartItem({ url, id, amount, count, creator, name, price, size }) {
+function CartItem({
+  url,
+  id,
+  amount,
+  count,
+  creator,
+  name,
+  price,
+  size,
+  like,
+}) {
+  const [likeA, setLikeA] = useState(like);
+
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
   const curItem = cartItems.find((i) => i.id === id);
@@ -20,11 +33,11 @@ function CartItem({ url, id, amount, count, creator, name, price, size }) {
   return (
     <div>
       <hr className="border-gray-700 border-t-[3px] " />
-      <div className=" flex sm:flex-row flex-col gap-3 md:gap-12 py-8 ">
+      <div className=" flex items-center sm:flex-row flex-col gap-3 md:gap-12 py-8 ">
         <div className="">
-          <img className=" sm:h-60" src={url} alt="" />
+          <img className=" max-h-60" src={url} alt="" />
         </div>
-        <div className="w-full flex justify-between  md:text-xl p-3">
+        <div className="w-full flex sm:justify-between justify-around  md:text-xl p-3">
           <div className="flex justify-between gap-2 flex-col capitalize">
             <p>{name}</p>
             <p>{creator}</p>
@@ -33,34 +46,37 @@ function CartItem({ url, id, amount, count, creator, name, price, size }) {
               <span>:</span>
               <span> {size.ft}</span>
             </p>
-            <div className="md:text-2xl text-xl font-medium flex sm:gap-4 justify-between sm:p-0 p-1 border-black sm:border-0 border-2 rounded-lg">
-              <button
+            <div className="flex gap-4 items-center">
+              <div
+                className=" cursor-pointer"
                 onClick={() => {
-                  dispatch(decCount(id));
+                  setLikeA(!likeA);
                 }}
-                className="sm:p-2"
               >
-                -
-              </button>
-
-              <span className="sm:p-2"> {count}</span>
-              <button
-                onClick={() => {
-                  dispatch(decCount(id));
-                }}
-                className="sm:p-2"
-              >
-                +
-              </button>
+                {likeA ? (
+                  <FcLike
+                    className="m-2  active:scale-120 duration-300"
+                    size={40}
+                  />
+                ) : (
+                  <FcLikePlaceholder
+                    className="m-2  active:scale-120 duration-300"
+                    size={40}
+                  />
+                )}
+              </div>
             </div>
           </div>
           <div className="flex flex-col items-center justify-between  ">
-            <button onClick={() => dispatch(removeItem(id))}>
+            <button
+              className="items-center justify-center flex border-[3px] border-black p-1 rounded-full"
+              onClick={() => dispatch(removeItem(id))}
+            >
               <FaTimes />
             </button>
-            <p className="font-semibold">{price.usd}</p>
 
-            <p className="font-semibold">{amount}</p>
+            <p className="font-semibold">{count}</p>
+            <p className="font-semibold">{price.usd}</p>
           </div>
         </div>
       </div>

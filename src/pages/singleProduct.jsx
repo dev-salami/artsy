@@ -3,7 +3,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { addCart, decCount } from "../redux/cartSlice";
+import { addCart } from "../redux/cartSlice";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Img from "../asset/product-1.png";
 import eth from "../asset/eth.png";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function SingleProduct() {
   const dispatch = useDispatch();
@@ -79,7 +79,6 @@ function SingleProduct() {
                 <button
                   onClick={() => {
                     Count > 1 && setCount((prev) => prev - 1);
-                    dispatch(decCount(id));
                   }}
                   className="p-2"
                 >
@@ -136,6 +135,14 @@ function SingleProduct() {
               </div>
             </div>
           </main>
+        </div>
+        <div className=" flex justify-center">
+          <Link
+            className="bg-blue-500 text-white px-4 py-2  mt-12 "
+            to="/products"
+          >
+            Continue Shopping
+          </Link>
         </div>
         <div className="flex md:flex-row flex-col justify-between items-center p-4 gap-6  my-12 max-w-5xl mx-auto bg-white shadow-gray-100 shadow-md  drop-shadow-md">
           <p className="text-xl">Explore more from this collection</p>
